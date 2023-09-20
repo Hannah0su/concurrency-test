@@ -53,4 +53,30 @@ public class CouponServiceTest {
 		long count = couponRepository.count();
 		assertThat(count).isEqualTo(100);
 	}
+
+	@Test
+	@DisplayName("여러명 발급_레디스")
+	public void 여러명발급_레디스() throws InterruptedException {
+		int threadCount = 1000;
+		ExecutorService executorService = Executors.newFixedThreadPool(32);
+		CountDownLatch countDownLatch = new CountDownLatch(threadCount);
+
+		for (int i = 0; i < threadCount; i++) {
+			long userId = i;
+			executorService.submit(() -> {
+				try {
+					couponService.issuanceByRedis(userId);
+				} finally {
+					countDownLatch.countDown();
+				}
+
+			});
+		}
+
+		countDownLatch.await();
+		long count = couponRepository.count();
+		assertThat(count).isEqualTo(100);
+	}
+
+
 }
