@@ -122,13 +122,13 @@ Optional<Post> findById(Long id);
     - 쿠폰이 100장이상 발급되면 안된다.
 ```
 
-### Case1
+### [Case1](https://github.com/Hannah0su/concurrency-test/commit/74e5f8420ff66df8abf5882e0f09e8a355dc5a85)
 
 ```text
 - 경합 조건 발생(Race Condition)
     - 다수의 스레드가 같은 공유자원(쿠폰)에 접근하면서 데이터 정합성이 맞지 않게 됨
 ```
-### Case2
+### [Case2](https://github.com/Hannah0su/concurrency-test/commit/9c33b21c409a091bfb0e076a9e8cac235f4707a5)
 
 ```text
 - Redis의 incr을 통해서 해결
@@ -136,7 +136,7 @@ Optional<Post> findById(Long id);
     - DBCP도 고려해봐야함
 ```
 
-### Case3
+### [Case3](https://github.com/Hannah0su/concurrency-test/commit/622320613bc9cf79a5978fc5fffa4f9c13a6d23e)
 
 ```text
 - Kafka를 이용하여 해결
